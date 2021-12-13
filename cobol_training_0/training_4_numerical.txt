@@ -1,0 +1,26 @@
+*>数値を変数に設定する
+IDENTIFICATION DIVISION.
+PROGRAM-ID. TRAINING_4_NUMERICAL.
+DATA DIVISION.
+    WORKING-STORAGE SECTION.
+        01 DATA_1 PIC X(20).
+        01 DATA_2 PIC 9(20).
+        01 DATA_3 PIC 999999.
+        01 DATA_4 PIC 99999V99.
+        01 DATA_5 PIC 9(5)V9(2).
+        01 DATA_6 PIC 999999 VALUE 123.
+PROCEDURE DIVISION.
+    MAIN SECTION.
+        MOVE 99999 TO DATA_1 DATA_2 DATA_3.
+        MOVE 123.45 TO DATA_4 DATA_5.
+        DISPLAY DATA_1.
+        DISPLAY DATA_2.
+        DISPLAY DATA_3.
+        DISPLAY DATA_4.
+        DISPLAY DATA_5.
+        DISPLAY DATA_6.
+        STOP RUN.
+*> PIC 9 9の数だけ数値の桁が設定される
+*> 設定された桁に数値が入力されなかった場合は0が入る
+*> Vで小数点を扱えるようになる
+*> VALUEで初期値を設定できる
