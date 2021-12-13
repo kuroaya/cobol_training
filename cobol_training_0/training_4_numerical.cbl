@@ -1,4 +1,4 @@
-*>���l��ϐ��ɐݒ肷��
+*>数値を変数に設定する
 IDENTIFICATION DIVISION.
 PROGRAM-ID. TRAINING_4_NUMERICAL.
 DATA DIVISION.
@@ -20,7 +20,7 @@ PROCEDURE DIVISION.
         DISPLAY DATA_5.
         DISPLAY DATA_6.
         STOP RUN.
-*> PIC 9 9�̐��������l�̌����ݒ肳���
-*> �ݒ肳�ꂽ���ɐ��l�����͂���Ȃ������ꍇ��0������
-*> V�ŏ����_��������悤�ɂȂ�
-*> VALUE�ŏ����l��ݒ�ł���
+*> PIC 9 9の数だけ数値の桁が設定される
+*> 設定された桁に数値が入力されなかった場合は0が入る
+*> Vで小数点を扱えるようになる
+*> VALUEで初期値を設定できる
