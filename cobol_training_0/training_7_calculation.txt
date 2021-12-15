@@ -1,0 +1,43 @@
+*>数値の演算方法
+IDENTIFICATION DIVISION.
+PROGRAM-ID. TRAINING_7_CALCULATION.
+DATA DIVISION.
+    WORKING-STORAGE SECTION.
+        01 MY-NUMERICAL.
+            03 N1 PIC 9(2) VALUE 0.
+            03 N2 PIC 9(2) VALUE 0.
+            03 N3 PIC 9(2) VALUE 0.
+            03 N4 PIC 9(2) VALUE 0.
+            03 N5 PIC 9(2) VALUE 0.
+PROCEDURE DIVISION.
+    MAIN SECTION.
+*>足し算
+        ADD 5 TO N1 N2 N3.
+*>引き算
+        SUBTRACT 2 FROM N1 N2.
+*>演算結果
+        DISPLAY MY-NUMERICAL.
+*>割り算
+        MOVE 10 TO N1.
+        MOVE 3 TO N2.
+        DIVIDE N1 BY N2 GIVING N3 REMAINDER N4.
+*>演算結果
+        DISPLAY MY-NUMERICAL.
+*>かけ算
+        MULTIPLY N1 BY N2 GIVING N3.
+*>演算結果
+        DISPLAY MY-NUMERICAL.
+        COMPUTE N3 = N1 * N2.
+        DISPLAY N3.
+        STOP RUN.
+*>ADD 足し算
+*>ADD 数値 TO 足したい値
+*>SUBTRACT 引き算
+*>SUBTRACT 数値 FROM 引きたい値
+*>DIVIDE 割り算
+*>DIVIDE 割られる値 BY 割る値 GIVING 答えを収める値 REMAINDER 余りを収める値
+*>MULTIPLY かけ算
+*>MULTIPLY かけられる値 BY かける値 GIVING 答えを収める値
+*>COMPUTE 四則計算の記号を用いて演算ができるようになる
+*>+ - / *
+*>COMPUTEを使用したときは、複数項目について演算はできない
