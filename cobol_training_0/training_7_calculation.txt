@@ -39,5 +39,5 @@ PROCEDURE DIVISION.
 *>MULTIPLY かけ算
 *>MULTIPLY かけられる値 BY かける値 GIVING 答えを収める値
 *>COMPUTE 四則計算の記号を用いて演算ができるようになる
-*>+ - / *
+*>+ - / * **
 *>COMPUTEを使用したときは、複数項目について演算はできない
