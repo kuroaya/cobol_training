@@ -1,0 +1,32 @@
+*>PERFOM 実行 繰り返しの処理を行う
+IDENTIFICATION DIVISION.
+PROGRAM-ID. TRAINING_11_PERFORM.
+DATA DIVISION.
+    WORKING-STORAGE SECTION.
+        01 DATA_COUNTER PIC 9(5) VALUE 1.
+PROCEDURE DIVISION.
+    MAIN SECTION.
+*>PERFORM 指定した回数実行する
+        PERFORM 10 TIMES
+            DISPLAY "COUNTER_1 =" DATA_COUNTER
+            ADD 1 TO DATA_COUNTER
+        END-PERFORM.
+        MOVE 1 TO DATA_COUNTER.
+*>PERFORM UNTIL 終了条件を設定して、条件を満たすまで実行する
+        PERFORM UNTIL DATA_COUNTER > 10
+            DISPLAY "COUNTER_2 =" DATA_COUNTER
+            ADD 1 TO DATA_COUNTER
+        END-PERFORM.
+*>PERFORM VARYING 条件の項目を指定した値から、指示した分だけ増やしていき、条件を満たすまで実行する
+        PERFORM VARYING DATA_COUNTER FROM 1 BY 1 UNTIL DATA_COUNTER > 10 
+            DISPLAY "COUNTER_3 =" DATA_COUNTER
+        END-PERFORM.
+*>増加分は任意に指定できる
+        PERFORM VARYING DATA_COUNTER FROM 1 BY 3 UNTIL DATA_COUNTER > 10 
+            DISPLAY "COUNTER_4 =" DATA_COUNTER
+        END-PERFORM.
+        STOP RUN.
+*>PERFORM 指定した回数実行する
+*>PERFORM UNTIL 終了条件を設定して、条件を満たすまで実行する
+*>PERFORM VARYING 条件の項目を指定した値から、指示した分だけ増やしていき、条件を満たすまで実行する
+*>増加分は任意に指定できる
