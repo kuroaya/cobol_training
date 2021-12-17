@@ -1,0 +1,32 @@
+*>ファイルから読み込む
+IDENTIFICATION DIVISION.
+PROGRAM-ID. TRAINING_12_READ.
+ENVIRONMENT DIVISION.
+    INPUT-OUTPUT SECTION.
+        FILE-CONTROL.
+            SELECT IN_FILE ASSIGN TO "File1"
+                ORGANIZATION IS LINE SEQUENTIAL
+                STATUS FILE_STATUS.
+DATA DIVISION.
+    FILE SECTION.
+        FD IN_FILE.
+            01 FILE_RECORD PIC X(20).
+    WORKING-STORAGE SECTION.
+        01 FILE_STATUS PIC XX.
+PROCEDURE DIVISION.
+    MAIN SECTION.
+        OPEN INPUT IN_FILE.
+        PERFORM UNTIL FILE_STATUS NOT = "00"
+            READ IN_FILE
+                AT END
+                    DISPLAY "END";
+                NOT AT END
+                    DISPLAY "CONTINUE "FILE_RECORD;
+            END-READ
+        END-PERFORM.
+        CLOSE IN_FILE.
+        STOP RUN.
+*>STATUS ファイルの状態を示す
+*>STATUSは英数字２文字で表される
+*>00は操作の成功を表す
+*>READ ファイルからレコードを読み出す
