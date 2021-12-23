@@ -1,0 +1,27 @@
+*>PERFORM PERFORM文の中にPERFORMを重ねて記述することができる
+IDENTIFICATION DIVISION.
+PROGRAM-ID. SAMPLE_12_PERFORM_2.
+DATA DIVISION.
+    WORKING-STORAGE SECTION.
+    01 DICE_A PIC 9.
+    01 DICE_B PIC 9.
+    01 SUM_DATA PIC 999.
+PROCEDURE DIVISION.
+    MAIN_PART SECTION.
+    INITIALIZE_PART.
+        MOVE ZERO TO SUM_DATA.
+    VARYING_PART.
+        PERFORM VARYING DICE_A FROM 1 BY 1 UNTIL DICE_A > 6
+            PERFORM VARYING DICE_B FROM 1 BY 1 UNTIL DICE_B > 6
+                COMPUTE SUM_DATA = SUM_DATA + DICE_A + DICE_B ;
+            END-PERFORM
+        END-PERFORM.
+        DISPLAY SUM_DATA.
+        STOP RUN.
+*>さいころを二回振ったときに、1回目と2回目の目の出現する可能性のある目の総和を求める
+*>PERFORMとPERFORMを重ねている
+*>まず外側のPERFORMが実行される
+*>次に内側が6回実行される
+*>外側に戻る。
+*>外側の2回目が実行される
+*>上記が6回繰り返される
