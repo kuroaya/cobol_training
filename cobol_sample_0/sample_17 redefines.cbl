@@ -1,0 +1,27 @@
+*>REDEFINES データ項目を再定義する
+IDENTIFICATION DIVISION.
+PROGRAM-ID. SAMPLE_17_REDEFINES.
+DATA DIVISION.
+    WORKING-STORAGE SECTION.
+        01 DATA_SYSTEM_DATE.
+            05 DATA_DATE PIC 9(08).
+            05 DATA_DATE_R REDEFINES DATA_DATE.
+                10 DATA_YEAR PIC 9(04).
+                10 DATA_MONTH PIC 9(02).
+                10 DATA_DAY PIC 9(02).
+PROCEDURE DIVISION.
+    MAIN_PART SECTION.
+    INPUT_SECTION.
+        MOVE 20211227 TO DATA_DATE.
+        MOVE 2021 TO DATA_YEAR.
+        MOVE 12 TO DATA_MONTH.
+        MOVE 27 TO DATA_DAY.
+    OUTPUT_SECTION.
+        DISPLAY DATA_DATE.
+        DISPLAY DATA_YEAR.
+        DISPLAY DATA_MONTH.
+        DISPLAY DATA_DAY.
+        STOP RUN.
+*>データ項目 REDEFINES 再定義したいデータ項目
+*>再定義したいデータ項目と、以降に設定したデータ項目について、別名をもって領域を共有できる
+    
