@@ -1,0 +1,65 @@
+*>INSPECT文のTALLYING指定
+IDENTIFICATION DIVISION.
+PROGRAM-ID. SAMPLE_23_INSPECT.
+DATA DIVISION.
+    WORKING-STORAGE SECTION.
+    01 INSPECTION_TARGET PIC X(5).
+    01 TIMES_1 PIC 9 VALUE ZERO.
+    01 TIMES_2 PIC 9 VALUE ZERO.
+    01 TIMES_3 PIC 9 VALUE ZERO.
+PROCEDURE DIVISION.
+    MAIN_PART SECTION.
+    CHARACTER_SPECIFY.
+        MOVE "XYZ" TO INSPECTION_TARGET.
+        INSPECT INSPECTION_TARGET TALLYING
+            TIMES_1 FOR CHARACTERS.
+            DISPLAY TIMES_1.
+            INITIALIZE TIMES_1.
+    BEFORE_SPECIFY.
+        MOVE "XYZ" TO INSPECTION_TARGET.
+        INSPECT INSPECTION_TARGET TALLYING
+            TIMES_1 FOR CHARACTERS BEFORE "Z".
+            DISPLAY TIMES_1.
+            INITIALIZE TIMES_1.
+    AFTER_SPECIFY.
+        MOVE "XYZ" TO INSPECTION_TARGET.
+        INSPECT INSPECTION_TARGET TALLYING
+            TIMES_1 FOR CHARACTERS AFTER "X".
+            DISPLAY TIMES_1.
+            INITIALIZE TIMES_1.
+    ALL_SPECIFY.
+        MOVE "ABCAB" TO INSPECTION_TARGET.
+        INSPECT INSPECTION_TARGET TALLYING
+            TIMES_1 FOR ALL "AB".
+            DISPLAY TIMES_1.
+            INITIALIZE TIMES_1.
+    ALLS_SPECIFY.
+        MOVE "ABCAB" TO INSPECTION_TARGET.
+        INSPECT INSPECTION_TARGET TALLYING
+            TIMES_1 FOR ALL "AB", ALL "C".
+            DISPLAY TIMES_1.
+            INITIALIZE TIMES_1.
+    MULTIPLE_SPECIFY.
+        MOVE "AACAB" TO INSPECTION_TARGET.
+        INSPECT INSPECTION_TARGET TALLYING
+            TIMES_1 FOR ALL "CAB"
+            TIMES_2 FOR LEADING "A"
+            TIMES_3 FOR CHARACTERS.
+            DISPLAY TIMES_1 " " TIMES_2 " " TIMES_3.
+            INITIALIZE TIMES_1 TIMES_2 TIMES_3.
+    END_PART.
+        STOP RUN.
+*>INSPECT 検査対象 TALLYING
+*>検査対象を指定する
+*>回数 FOR CHARACTERS.
+*>検査対象の検査は行わずに、その大きさを設定する
+*>回数 FOR CHARACTERS BEFORE 指定文字.
+*>検査対象の左端から検査を行い、指定文字までの大きさを設定する
+*>回数 FOR CHARACTERS AFTER 指定文字.
+*>検査対象の左端から検査を行い、指定文字からの大きさを設定する
+*>回数 FOR ALL 指定文字.
+*>検査対象の左端から検査を行い、検査対象に含まれるすべての検査文字の大きさを設定する
+*>回数 FOR ALL 指定文字1, ALL 指定文字2.
+*>検査対象に含まれるすべての(複数の)検査文字の大きさを設定する。大きさは合算される
+*>INSPECT文において、一度一致した文字列は、他の検査文字列の対象にならない
+*>INSPECT文において、検索対象の文字がすべて検索されたか、FOR指定がなくなると検査は終了する
