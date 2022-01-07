@@ -15,8 +15,19 @@ PROCEDURE DIVISION.
             DELIMITED BY SIZE
             INTO SEND_ON
         END-STRING.
-    OUTPUT_PART.
         DISPLAY SEND_ON.
+        INITIALIZE SEND_ON.
+    PART_PART.
+        MOVE 4 TO START_POINT.
+        STRING
+            POSTING_1 DELIMITED BY SPACE
+            POSTING_2 DELIMITED BY "/"
+            POSTING_3 DELIMITED BY SIZE
+            INTO SEND_ON
+            WITH POINTER START_POINT
+        END-STRING.
+        DISPLAY SEND_ON.
+        INITIALIZE SEND_ON.
     END_PART.
         STOP RUN.
 *>データ項目における内容を連結する
@@ -28,3 +39,7 @@ PROCEDURE DIVISION.
 *>連結された文字列の転記先を指定する
 *>END-STRING.
 *>処理終了
+*>WITH POINTER 開始位置
+*>開始位置で指定された文字位置から処理を開始する
+*>転記対象 DELMITED BY 区切り文字
+*>区切り文字までの文字列を転記の対象とする
