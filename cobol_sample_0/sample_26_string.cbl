@@ -1,0 +1,30 @@
+*>STRING文
+IDENTIFICATION DIVISION.
+PROGRAM-ID. SAMPLE_26_STRING.
+DATA DIVISION.
+    WORKING-STORAGE SECTION.
+    01 POSTING_1 PIC X(5) VALUE "ABC D".
+    01 POSTING_2 PIC X(5) VALUE "**-//".
+    01 POSTING_3 PIC X(5) VALUE "  XYZ".
+    01 SEND_ON PIC X(20) VALUE ALL "#".
+    01 START_POINT PIC 99.
+PROCEDURE DIVISION.
+    MAIN_PART SECTION.
+    STRING_PART.
+        STRING POSTING_1 POSTING_2 POSTING_3
+            DELIMITED BY SIZE
+            INTO SEND_ON
+        END-STRING.
+    OUTPUT_PART.
+        DISPLAY SEND_ON.
+    END_PART.
+        STOP RUN.
+*>データ項目における内容を連結する
+*>STRING 転記対象
+*>連結したいデータを指定する
+*>DELMITED BY SIZE
+*>区切り文字を指定する。もしくは指定をしない(SIZE)
+*>INTO 転記先
+*>連結された文字列の転記先を指定する
+*>END-STRING.
+*>処理終了
