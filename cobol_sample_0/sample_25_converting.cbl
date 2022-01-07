@@ -1,0 +1,24 @@
+*>CONVERTING指定
+IDENTIFICATION DIVISION.
+PROGRAM-ID. SAMPLE_25_CONVERTING.
+DATA DIVISION.
+    WORKING-STORAGE SECTION.
+    01 REPLACEMENT PIC X(5) VALUE "ABCAD".
+    01 JAPANESE PIC N(10) VALUE N"日本海の波".
+PROCEDURE DIVISION.
+    MAIN_PART SECTION.
+    INSPECT_PART.
+        INSPECT REPLACEMENT
+            CONVERTING "ABC" TO "XYZ" BEFORE "D".
+        INSPECT JAPANESE
+            CONVERTING N"日本海" TO N"富士山".
+        OUTPUT_PART.
+            DISPLAY REPLACEMENT.
+            DISPLAY JAPANESE.
+        END_PART.
+            STOP RUN.
+*>INSPECT 検査対象
+*>検査の対象となるデータを指定する
+*>CONVERTING 対象文字 TO 置換文字.
+*>検査対象中にある対象文字を置換文字に置き換える
+*>対象文字と置換文字の左から1文字ずつを置き換えていく
