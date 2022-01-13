@@ -1,0 +1,53 @@
+IDENTIFICATION DIVISION.
+PROGRAM-ID. SAMPLE_34_SCREEN.
+ENVIRONMENT DIVISION.
+    CONFIGURATION SECTION.
+    SPECIAL-NAMES.
+        CURSOR IS CURSOR-POSITION
+        CRT STATUS IS CRT-DATA.
+DATA DIVISION.
+    WORKING-STORAGE SECTION.
+        01 CURSOR-POSITION PIC X(6).
+        01 CRT-DATA PIC 9(4).
+        01 WARNING PIC X(20)
+            VALUE "PLEASE INPUT 1 OR 2".
+        01 INPUT-RESULT PIC X(1).
+        01 OUTPUT-RESULT PIC X(10).
+    SCREEN SECTION.
+        01 CONSOLE-SCREEN
+            LINE 12 COLUMN 20.
+            05 WARNING-STRING PIC X(20)
+                FROM WARNING.
+            05 INPUT-RESULT-SCREEN
+                LINE 14 COLUMN 30 PIC X(1)
+                TO INPUT-RESULT.
+            05 OUTPUT-RESULT-SCREEN
+                LINE 14 COLUMN 38 PIC X(10)
+                FROM OUTPUT-RESULT.
+PROCEDURE DIVISION.
+    MAIN_PART SECTION.
+        MOVE "014037" TO CURSOR-POSITION.
+        ACCEPT CONSOLE-SCREEN
+            ON EXCEPTION DISPLAY "ERROR".
+        IF INPUT-RESULT = 1
+            THEN
+                MOVE "BANANA" TO OUTPUT-RESULT;
+            ELSE
+                IF INPUT-RESULT = 2
+                    THEN
+                        MOVE "MELON" TO OUTPUT-RESULT;
+                    ELSE
+                        CONTINUE;
+                END-IF
+        END-IF.
+        DISPLAY CONSOLE-SCREEN.
+        DISPLAY OUTPUT-RESULT.
+    END_PART.
+        STOP RUN.
+*>ACCEPT データ
+*>データを受け取る
+*>ON EXCEPTION 処理
+*>例外の処理を設定する
+*>SCREEN SECTION
+*>SCREEN SECTIONで宣言したデータを、DISPLAY文で画面に表示したり
+*>利用者が入力したデータを、ACCEPT文で画面から受け取ったりする機能
