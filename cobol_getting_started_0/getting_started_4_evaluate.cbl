@@ -1,0 +1,36 @@
+*>EVALUATE文 多岐分岐を行う
+IDENTIFICATION DIVISION.
+PROGRAM-ID. GETTING_STARTED_4_EVALUATE.
+DATA DIVISION.
+    FILE SECTION.
+    WORKING-STORAGE SECTION.
+        01 WORKING_AREA.
+            03 CONSOLE_INPUT PIC X(1).
+PROCEDURE DIVISION.
+    MAIN_PROCEDURE.
+    INITIALIZE_PART.
+        MOVE SPACE TO CONSOLE_INPUT.
+    INPUT_PART.
+        DISPLAY "PLEASE INPUT.".
+        ACCEPT CONSOLE_INPUT FROM CONSOLE.
+    JUDGE_PART.
+        EVALUATE CONSOLE_INPUT
+            WHEN 0 THRU 8
+                DISPLAY "0-8 INPUT"
+            WHEN 9
+                DISPLAY "9 INPUT"
+            WHEN OTHER
+                DISPLAY "PLEASE 0-9 NUMBER"
+        END-EVALUATE.
+    END_PART.
+        STOP RUN.
+*>EVALUATE 評価対象
+*>評価の対象を記述する
+*>WHEN 値1
+*>値1に一致する場合に実行する処理を記述する
+*>WHEN 値1 THRU 値2
+*>値1から値2に一致する場合に実行する処理を記述する
+*>WHEN OTHER
+*>どの値にも一致しない場合に実行する処理を記述する
+*>END-EVALUATE.
+*>処理の終了
