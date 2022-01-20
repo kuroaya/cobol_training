@@ -1,0 +1,81 @@
+*>RELATIVE 相対ファイル キーを指定できる
+IDENTIFICATION DIVISION.
+PROGRAM-ID. GETTING_STARTED_8_RELATIVE.
+ENVIRONMENT DIVISION.
+    INPUT-OUTPUT SECTION.
+    FILE-CONTROL.
+        SELECT SAMPLE_FILE ASSIGN TO "File1"
+            ORGANIZATION IS RELATIVE
+            ACCESS MODE IS DYNAMIC
+            RELATIVE KEY IS KEY_NUM.
+DATA DIVISION.
+    FILE SECTION.
+        FD SAMPLE_FILE.
+            01 TEST_RECORD.
+                05 OUT_FILE_REC PIC X(50).
+        WORKING-STORAGE SECTION.
+            01 KEY_NUM PIC 9.
+            01 TEST_RECORD_NUM PIC 9 VALUE 5.
+            01 HANTEI PIC X.
+                88 READ_CONTINUE VALUE "1".
+                88 READ_END VALUE "2".
+PROCEDURE DIVISION.
+    MAIN_PART SECTION.
+    MAKE_RELATIVE.
+        OPEN OUTPUT SAMPLE_FILE.
+        MOVE 1 TO KEY_NUM.
+        PERFORM TEST_RECORD_NUM TIMES
+            DISPLAY "PREASE RECORD INPUT" KEY_NUM "/5" WITH NO ADVANCING;
+            ACCEPT OUT_FILE_REC
+            WRITE TEST_RECORD
+                INVALID KEY 
+                    DISPLAY "ERROR"
+                NOT INVALID KEY 
+                    DISPLAY "SUCCESS:" OUT_FILE_REC
+            END-WRITE
+            ADD 1 TO KEY_NUM
+        END-PERFORM.
+        CLOSE SAMPLE_FILE.
+    READ_PART.
+        DISPLAY "RELATIVE FILE READ.".
+        OPEN INPUT SAMPLE_FILE.
+        SET READ_CONTINUE TO TRUE.
+        PERFORM UNTIL READ_END
+            READ SAMPLE_FILE NEXT
+                AT END
+                    SET READ_END TO TRUE;
+                NOT AT END
+                    DISPLAY OUT_FILE_REC;
+            END-READ
+        END-PERFORM.
+        CLOSE SAMPLE_FILE.
+    END-PART.
+        DISPLAY "END".
+        STOP RUN.
+*>INPUT-OUTPUT SECTION.
+*>入出力節
+*>FILE-CONTROL.
+*>ファイル管理段落
+*>SELECT ファイル名 ASSIGN TO データ名
+*>ファイルの宣言
+*>ORGANIZATION IS RELATIVE
+*>ACCESS MODE IS DYNAMIC OR RANDOM
+*>RELATIVE KEY IS キー項目.
+*>ファイル編成の宣言
+*>RELATIVE 相対　
+*>DYNAMIC 動的呼び出し
+*>RANDOM 乱呼び出し
+*>FILE SECTION.
+*>ファイル節
+*>FD ファイル名
+*>ファイル記述項
+*>OPEN モード ファイル名
+*>READ
+*>読み込み
+*>WRITE
+*>書き込み
+*>REWRITE
+*>更新
+*>CLOSE
+*>ファイルを閉じる
+            
