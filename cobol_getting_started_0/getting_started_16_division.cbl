@@ -1,0 +1,38 @@
+*>DIVISION COBOLのプログラム構成
+IDENTIFICATION DIVISION.
+PROGRAM-ID. GETTING_STARTED_16_DIVISION.
+ENVIRONMENT DIVISION.
+DATA DIVISION.
+    WORKING-STORAGE SECTION.
+        01 SHIMEI.
+            05 MIYOUJI PIC X(08) VALUE "YAMADA".
+            05 NAMAE PIC X(08) VALUE "TARO".
+        01 NYUUSYABI.
+            05 NEN PIC X(04) VALUE "2018".
+            05 TUKI PIC X(02) VALUE "04".
+            05 HI PIC X(02) VALUE "01".
+        01 SHOZOKU.
+            05 BU PIC X(10) VALUE "JINJI".
+            05 KA PIC X(10) VALUE "1".
+            05 KAKARI PIC X(10) VALUE "1".
+PROCEDURE DIVISION.
+    MAIN_PROCEDURE SECTION.
+    OUTPUT_PROCEDURE.
+        DISPLAY SHIMEI.
+        DISPLAY NEN TUKI.
+        DISPLAY BU.
+    END_PROCEDURE.
+        STOP RUN.
+*>IDENTIFICATION DIVISION.
+*>COBOLプログラムであることを識別するためのDIVISION
+*>プログラム名を定義する
+*>ENVIRONMENT DIVISION.
+*>COBOLでファイルを使用する際に、どのファイルを使用するか宣言するためのDIVISION
+*>ファイルを使用しない場合は、最初の一行を記述しておけばよい
+*>DATA DIVISION.
+*>プログラム内で使用するデータ項目を宣言するためのDIVISION
+*>PROCEDURE DIVISION.
+*>実際の処理を記述するためのDIVISION
+*>END PROGRAM プログラム名.
+*>プログラムの終了を宣言する
+
