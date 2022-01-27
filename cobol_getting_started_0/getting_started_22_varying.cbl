@@ -1,0 +1,30 @@
+*>PERFORM VARYING データ項目を規則的に変化させながら繰り返し処理を行う
+IDENTIFICATION DIVISION.
+PROGRAM-ID. GETTING_STARTED_22_VARYING.
+ENVIRONMENT DIVISION.
+DATA DIVISION.
+    WORKING-STORAGE SECTION.
+        01 WK_KAISU PIC 99 VALUE 10.
+        01 WK_SUJI PIC 99 VALUE ZERO.
+        01 WK_KAISU_TTL PIC 999 VALUE ZERO.
+    PROCEDURE DIVISION.
+        PERFORM_VARYING.
+            PERFORM VARYING WK_SUJI FROM 1 BY 1
+                UNTIL WK_SUJI > WK_KAISU;
+            END-PERFORM.
+            DISPLAY WK_SUJI.
+            INITIALIZE WK_SUJI.
+        COMBINED_PROCESSING.
+            PERFORM 10 TIMES
+                PERFORM VARYING WK_SUJI FROM 1 BY 1 
+                UNTIL WK_SUJI > WK_KAISU
+                    ADD 1 TO WK_KAISU_TTL;
+                END-PERFORM
+                DISPLAY WK_KAISU_TTL
+            END-PERFORM.
+            STOP RUN.
+*>PERFORM VARYING データ項目 FROM データ項目の初期値 BY 変化させる値
+*>UNTIL 条件式
+*>データ項目を初期値から変化させる値分増やしていき、条件式を満たしたら処理が終了する
+*>PERFORM TIMES 処理の中で PERFORM VARYING 処理を行っている
+*>10回の処理を10回繰り返す
