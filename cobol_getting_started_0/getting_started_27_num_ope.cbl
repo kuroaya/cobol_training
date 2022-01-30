@@ -1,0 +1,54 @@
+*>COBOLの数値操作
+IDENTIFICATION DIVISION.
+PROGRAM-ID. GETTING_STARTED_27_NUM_OPE.
+ENVIRONMENT DIVISION.
+DATA DIVISION.
+    WORKING-STORAGE SECTION.
+        01 NUM PIC 99 VALUE ZERO.
+        01 NUM_LIMIT PIC 99 VALUE 10.
+PROCEDURE DIVISION.
+*>ADD
+    ADD 1 TO NUM.
+    DISPLAY "ADD:"NUM.
+*>INITIALIZE
+    INITIALIZE NUM.
+    DISPLAY "INITIALIZE:"NUM.
+*>SUBTRACT
+    MOVE 10 TO NUM.
+    DISPLAY "NUM:"10.
+    SUBTRACT 5 FROM NUM.
+    DISPLAY "SUBTRACT:"NUM.
+*>MULTIPLY
+    MULTIPLY 2 BY NUM.
+    DISPLAY "MULTIPLY:"NUM.
+*>DIVIDE
+    DIVIDE 2 INTO NUM.
+    DISPLAY "DIVIDE:"NUM.
+*>COMPUTE
+    COMPUTE NUM = NUM + 5.
+    DISPLAY "COMPUTE NUM = NUM + 5 = "NUM.
+    COMPUTE NUM = NUM - 5.
+    DISPLAY "COMPUTE NUM = NUM - 5 = "NUM.
+    COMPUTE NUM = NUM * 2.
+    DISPLAY "COMPUTE NUM = NUM * 2 = "NUM.
+    COMPUTE NUM = NUM / 2.
+    DISPLAY "COMPUTE NUM = NUM / 2 = "NUM.
+*>繰り返し
+    PERFORM UNTIL NUM > NUM_LIMIT
+        ADD 1 TO NUM ;
+        DISPLAY NUM;
+    END-PERFORM.
+    STOP RUN.
+*>ADD 数値(データ項目) TO データ項目(数値)
+*>TOの前後の値を加算して、その結果をTOの後のデータ項目に代入する
+*>INITIALIZE データ項目
+*>指定したデータ項目を初期化する
+*>SUBTRACT 数値(データ項目) FROM データ項目(数値)
+*>FROMの後の値から前の値を減算して、その結果をFROMの後のデータ項目に代入する
+*>MULTIPLY 数値(データ項目) BY データ項目(数値)
+*>BYの前後の値を乗算して、その結果をBYの後のデータ項目に代入する
+*>DIVIDE 数値(データ項目) INTO データ項目(数値)
+*>INTOの後の値から前の値を除算して、その結果をINTOの後のデータ項目に代入する
+*>COMPUTE 算術式
+*>算術式を使って計算ができる
+
