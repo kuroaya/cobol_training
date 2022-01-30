@@ -1,0 +1,33 @@
+*>日付や時刻を取得する
+IDENTIFICATION DIVISION.
+PROGRAM-ID. GETTING_STARTED_28_DATE.
+ENVIRONMENT DIVISION.
+DATA DIVISION.
+    WORKING-STORAGE SECTION.
+        01 WK-DATE PIC X(21).
+        01 INT_DATE PIC X(21).
+        01 REDEFINES INT_DATE.
+            05 INT_DATE_8 PIC 9(08).
+            05 PIC X(13).
+        01 INT_RESULT PIC 9(7).
+PROCEDURE DIVISION.
+    *>現在の日付を取得
+    MOVE FUNCTION CURRENT-DATE TO WK-DATE.
+    DISPLAY "現在の日時:"WK-DATE.
+    *>コンパイルの日付を取得
+    MOVE FUNCTION WHEN-COMPILED TO WK-DATE.
+    DISPLAY "コンパイルの日時:"WK-DATE.
+    *>ジュリアンデートをグレゴリオ通日で取得
+    MOVE FUNCTION CURRENT-DATE TO INT_DATE.
+    COMPUTE INT_RESULT =
+        FUNCTION DAY-OF-INTEGER(
+            FUNCTION INTEGER-OF-DATE(INT_DATE_8)).
+    DISPLAY INT_RESULT.
+    *>処理完了
+    STOP RUN.
+*>FUNCTION CURRENT-DATE
+*>現在の日付と時刻を取得できる
+*>FUNCTION WHEN-COMPILED
+*>プログラムのコンパイル日付を取得する
+*>FUNCTION DAY-OF-INTEGER
+*>ジュリアンデート(その年が始まって何日経ったか)をグレゴリを通日を取得する
