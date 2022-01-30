@@ -1,0 +1,40 @@
+*>ファイルに入力、出力した日時を取得する
+IDENTIFICATION DIVISION.
+PROGRAM-ID. GETTING_STARTED_29_FILE_DATE.
+ENVIRONMENT DIVISION.
+    INPUT-OUTPUT SECTION.
+        FILE-CONTROL.
+            SELECT READ-FILE ASSIGN TO 'File1'
+                ORGANIZATION IS LINE SEQUENTIAL.
+            SELECT WRITE-FILE ASSIGN TO 'File2'.
+DATA DIVISION.
+    FILE SECTION.
+        FD READ-FILE.
+            01 IN-FILE-REC PIC X(12).
+        FD WRITE-FILE.
+            01 OUT-FILE-REC PIC X(12).
+    WORKING-STORAGE SECTION.
+        01 WK-DATE.
+            05 WK-DATE-8 PIC X(08).
+            05 PIC X(13).
+PROCEDURE DIVISION.
+    *>データの取得
+    MOVE FUNCTION CURRENT-DATE(1:8) TO WK-DATE-8.
+    *>ファイルの読み込み
+    OPEN INPUT READ-FILE.
+        READ READ-FILE
+        END-READ.
+    CLOSE READ-FILE.
+    *>ファイルの書き込み
+    OPEN OUTPUT WRITE-FILE.
+        MOVE 'TEST' TO OUT-FILE-REC(1:4).
+        MOVE WK-DATE-8 TO OUT-FILE-REC(5:8).
+        WRITE OUT-FILE-REC.
+    CLOSE WRITE-FILE.
+    *>処理の終了
+    DISPLAY "処理完了".
+    STOP RUN.
+*>MOVE FUNCTION CURRENT-DATE(1:8) TO データ項目
+*>指定したデータ項目に、処理を実行時の年と月を格納する
+    
+                
