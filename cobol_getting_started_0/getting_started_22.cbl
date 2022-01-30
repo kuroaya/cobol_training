@@ -1,0 +1,22 @@
+*>String manipulation 文字列操作
+IDENTIFICATION DIVISION.
+PROGRAM-ID. GETTING_STARTED_23_STRING.
+ENVIRONMENT DIVISION.
+DATA DIVISION.
+    WORKING-STORAGE SECTION.
+        01 WK_MOJI_1 PIC X(06) VALUE '123456'.
+PROCEDURE DIVISION.
+*>文字列から指定した文字を取り出す
+    DISPLAY WK_MOJI_1.
+    DISPLAY WK_MOJI_1(1:3).
+    DISPLAY WK_MOJI_1(4:3).
+*>文字列の初期化
+    MOVE 'ABCDEF' TO WK_MOJI_1.
+    DISPLAY WK_MOJI_1.
+    INITIALIZE WK_MOJI_1.
+    DISPLAY WK_MOJI_1.
+    STOP RUN.
+*>データ項目(開始文字位置:[長さ])
+*>データ項目に格納した文字列を、開始文字位置から長さ分だけ取り出すことができる
+*>INITIALIZE データ項目
+*>データ項目の値を初期化する
