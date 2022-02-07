@@ -1,0 +1,35 @@
+*>LOW-VALUE あるデータ項目に対して、値をすべて「00」で埋める
+IDENTIFICATION DIVISION.
+PROGRAM-ID. GETTING_STARTED_34_LOW_VALUE.
+ENVIRONMENT DIVISION.
+DATA DIVISION.
+    WORKING-STORAGE SECTION.
+        01 WK_DATA PIC 99.
+        01 WK_SYUGO.
+            05 WK_1 PIC 999.
+            05 WK_2 PIC 9999.
+PROCEDURE DIVISION.
+    MOVE ZERO TO WK_DATA WK_SYUGO.
+    IF WK_DATA < ZERO
+        THEN
+            DISPLAY "WK_DATA=ZERO Smaller than ZERO"
+    END-IF.
+    
+    IF WK_SYUGO < ZERO
+        THEN
+            DISPLAY "WK_SYUGO=ZERO Smaller than ZERO"
+    END-IF.
+    
+    MOVE LOW-VALUE TO WK_DATA WK_SYUGO.
+    IF WK_DATA < ZERO
+        THEN
+            DISPLAY "WK_DATA=LOW-VALUE Smaller than ZERO"
+    END-IF.
+    
+    IF WK_SYUGO < ZERO
+        THEN
+            DISPLAY "WK_SYUGO=LOW-VALUE Smaller than ZERO"
+    END-IF.
+    
+    STOP RUN.
+*>LOW-VALUEは「00」すなわち「最小の値」をデータ項目に代入する
