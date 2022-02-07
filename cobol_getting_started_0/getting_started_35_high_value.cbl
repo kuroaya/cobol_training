@@ -1,0 +1,25 @@
+*>HTGH-VALUE データ項目に対して、すべての値を16進数「FF」で埋める
+IDENTIFICATION DIVISION.
+PROGRAM-ID. GETTING_STARTED_35_HIGH_VALUE.
+ENVIRONMENT DIVISION.
+DATA DIVISION.
+    WORKING-STORAGE SECTION.
+        01 WK_DATA PIC 99.
+        01 WK_SYUGO.
+            05 WK_1 PIC 999.
+            05 WK_2 PIC 9999.
+PROCEDURE DIVISION.
+    MOVE HIGH-VALUE TO WK_DATA WK_SYUGO.
+    IF WK_DATA > 99
+        THEN
+            DISPLAY "WK_DATA=HIGH-VALUE Greater than 99"
+    END-IF.
+    
+    IF WK_SYUGO > 9999999
+        THEN
+            DISPLAY "WK_SYUGO=HIGH-VALUE Greater than 9999999"
+    END-IF.
+    
+    STOP RUN.
+*>「FF」で埋めるということは、最大の値を有するということ
+
