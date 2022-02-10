@@ -1,0 +1,6 @@
+01 ()_RECORD.
+    05 ()_DATA_1 PIC X(30).
+    05 ()_DATA_2 PIC X(30).
+    05 ()_DATA_3 PIC X(30).
+    05 NUM_1 PIC 9(03).
+    05 NUM_2 PIC 9(03).
