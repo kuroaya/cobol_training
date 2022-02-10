@@ -1,0 +1,53 @@
+*>MERGE文　SORT文やMERGE文の処理で一時的にファイルが作成されて、そこで並び替えや結合処理などを行う
+IDENTIFICATION DIVISION.
+PROGRAM-ID. APPLICATION_4_MERGE.
+ENVIRONMENT DIVISION.
+    INPUT-OUTPUT SECTION.
+    FILE-CONTROL.
+        SELECT TEST_FILE1 ASSIGN TO 'File1'*>入力ファイル1
+            ORGANIZATION IS LINE SEQUENTIAL
+            STATUS IS IN_FILE_STATUS.
+        SELECT TEST_FILE2 ASSIGN TO 'File2'*>入力ファイル2
+            ORGANIZATION IS LINE SEQUENTIAL
+            STATUS IS IN_FILE_STATUS.
+        SELECT RESULT_FILE ASSIGN TO 'File3'*>出力ファイル
+            ORGANIZATION IS LINE SEQUENTIAL.
+        SELECT MEARGE_FILE ASSIGN TO 'File4'.*>併合用ファイル
+DATA DIVISION.
+    FILE SECTION.
+        FD TEST_FILE1.
+        01 TEST_RECORD.
+            05 NO_CORD PIC 9(5).
+            05 DATA_1 PIC X(5).
+            05 DATA_2 PIC X(5).
+        FD TEST_FILE2.
+        01 TEST_RECORD.
+            05 NO_CORD PIC 9(5).
+            05 DATA_1 PIC X(5).
+            05 DATA_2 PIC X(5).
+        FD RESULT_FILE.
+        01 RESULT_RECORD PIC X(15).
+        
+        SD MEARGE_FILE.
+        01 MEARGE_RECORD.
+            05 SORT_KEY PIC 9(5).
+            05 SORT_DATA PIC X(10).
+    WORKING-STORAGE SECTION.
+        01 IN_FILE_STATUS PIC XX.
+PROCEDURE DIVISION.
+    OPEN INPUT TEST_FILE1.
+    OPEN INPUT TEST_FILE2.
+    
+    MERGE MEARGE_FILE
+        ASCENDING KEY SORT_KEY
+        USING TEST_FILE1 TEST_FILE2
+        GIVING RESULT_FILE.
+    
+    CLOSE TEST_FILE1.
+    CLOSE TEST_FILE2.
+    
+    DISPLAY "PROGRAM END."
+    
+    STOP RUN.
+*>併合用ファイルもENVIRONMENT DIVISIONのFILE-CONTROLにファイルを定義する必要がある
+*>ファイルの併合処理を行う場合は、結合するファイルと、結果を出力するファイル、併合用ファイルが必要
