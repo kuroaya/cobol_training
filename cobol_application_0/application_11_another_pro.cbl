@@ -1,0 +1,24 @@
+*>COBOLから多言語を呼び出す
+IDENTIFICATION DIVISION.
+PROGRAM-ID. APPLICATION_11_ANOTHER_PRO.
+ENVIRONMENT DIVISION.
+DATA DIVISION.
+    WORKING-STORAGE SECTION.
+        01 WORK_NUM.
+            05 NUM_1 PIC 9(2) COMP-5.
+            05 NUM_2 PIC 9(2) COMP-5.
+PROCEDURE DIVISION.
+    DISPLAY "COBOL PROGRAM START".
+    *>C言語に渡す値の設定
+    MOVE 10 TO NUM_1.
+    MOVE 20 TO NUM_2.
+    
+    *>C言語の関数呼び出し
+    CALL "sample_c" USING BY VALUE NUM_1 NUM_2.
+    
+    DISPLAY "COBOL PROGRAM STOP".
+    STOP RUN.
+*>CALL "関数名" USING 値1 ….
+*>CALL後に指定した多言語の関数を呼び出す
+*>CALL "関数名" USING BY VALUE 値1 ….
+*>値渡しの場合はUSING指定のあとにBY VALUE等を指定する必要がある
