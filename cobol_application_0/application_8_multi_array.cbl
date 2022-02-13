@@ -1,0 +1,54 @@
+*>多次元配列
+IDENTIFICATION DIVISION.
+PROGRAM-ID. APPLICATION_8_MULTI_ARRAY.
+ENVIRONMENT DIVISION.
+    CONFIGURATION SECTION.
+DATA DIVISION.
+    WORKING-STORAGE SECTION.
+*>多次元配列を定義
+        01 WORK_ITEM.
+            05 WORK_DATA_1 OCCURS 2.
+            10 WORK_DATA_11 OCCURS 2.
+            15 WORK_DATA_111 OCCURS 3.
+            20 WORK_ITEM_1 PIC X(10).
+PROCEDURE DIVISION.
+    MAIN_PROCEDURE.
+*>多重配列に値を格納
+        MOVE "ITEM1-1-1" TO WORK_ITEM_1(1 1 1).
+        MOVE "ITEM1-1-2" TO WORK_ITEM_1(1 1 2).
+        MOVE "ITEM1-1-3" TO WORK_ITEM_1(1 1 3).
+        MOVE "ITEM1-2-1" TO WORK_ITEM_1(1 2 1).
+        MOVE "ITEM1-2-2" TO WORK_ITEM_1(1 2 2).
+        MOVE "ITEM1-2-3" TO WORK_ITEM_1(1 2 3).
+        
+        MOVE "ITEM2-1-1" TO WORK_ITEM_1(2 1 1).
+        MOVE "ITEM2-1-2" TO WORK_ITEM_1(2 1 2).
+        MOVE "ITEM2-1-3" TO WORK_ITEM_1(2 1 3).
+        MOVE "ITEM2-2-1" TO WORK_ITEM_1(2 2 1).
+        MOVE "ITEM2-2-2" TO WORK_ITEM_1(2 2 2).
+        MOVE "ITEM2-2-3" TO WORK_ITEM_1(2 2 3).
+*>結果を出力する
+        DISPLAY "WORK_ITEM(1 1 1):"WORK_ITEM_1(1 1 1).
+        DISPLAY "WORK_ITEM(1 1 2):"WORK_ITEM_1(1 1 2).
+        DISPLAY "WORK_ITEM(1 1 3):"WORK_ITEM_1(1 1 3).
+        DISPLAY "WORK_ITEM(1 2 1):"WORK_ITEM_1(1 2 1).
+        DISPLAY "WORK_ITEM(1 2 2):"WORK_ITEM_1(1 2 2).
+        DISPLAY "WORK_ITEM(1 2 3):"WORK_ITEM_1(1 2 3).
+        
+        DISPLAY "WORK_ITEM(2 1 1):"WORK_ITEM_1(2 1 1).
+        DISPLAY "WORK_ITEM(2 1 2):"WORK_ITEM_1(2 1 2).
+        DISPLAY "WORK_ITEM(2 1 3):"WORK_ITEM_1(2 1 3).
+        DISPLAY "WORK_ITEM(2 2 1):"WORK_ITEM_1(2 2 1).
+        DISPLAY "WORK_ITEM(2 2 2):"WORK_ITEM_1(2 2 2).
+        DISPLAY "WORK_ITEM(2 2 3):"WORK_ITEM_1(2 2 3).
+        
+        STOP RUN.
+*>多次元配列は、一次元配列と同じくDATA DIVISIONにOCCURS句を使用して定義する
+*>01 データ項目.
+*>  05 1次元配列のデータ項目定義 OCCURS 配列の最大要素数.
+*>  10 2次元配列のデータ項目定義 OCCURS 配列の最大要素数.
+*>  15 3次元配列のデータ項目定義 OCCURS 配列の最大要素数.
+*>  20 配列で使用するデータ項目定義.
+
+        
+    
