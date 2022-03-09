@@ -1,0 +1,82 @@
+*>FETCH 取得したデータをファイルに出力する
+IDENTIFICATION DIVISION.
+PROGRAM-ID. APPLICATION_21_FETCH_2.
+ENVIRONMENT DIVISION.
+    INPUT-OUTPUT SECTION.
+    FILE-CONTROL.
+        SELECT OUT01_FILE
+            ASSIGN TO "FILE1.txt"
+            ORGANIZATION IS LINE SEQUENTIAL.
+DATA DIVISION.
+    FILE SECTION.
+    FD OUT01_FILE.
+        01 OUT01.
+            05 OUT01_TID PIC X(04).
+            05 OUT01_TNAME PIC X(10).
+    WORKING-STORAGE SECTION.
+    *>1.ホスト変数の定義
+    EXEC SQL BEGIN DECLARE SECTION END-EXEC.
+        01 DBNAME PIC X(32) VALUE "testdb".
+        01 USERNAME PIC X(32) VALUE "********".
+        01 PASSWORD PIC X(32) VALUE "********".
+        01 TID PIC X(4).
+        01 TNAME PIC X(10).
+        01 SW_AREA.
+            05 SW-NOTFOUND PIC X(01) VALUE SPACE.
+        01 CST_AREA.
+            05 CST_1X PIC X(01) VALUE "1".
+            05 CST_SQL_NF PIC X9(09) COMP-5 VALUE +100.
+    EXEC SQL END DECLARE SECTION END-EXEC.
+    *>2.共通領域の定義
+    EXEC SQL INCLUDE SQLCA END-EXEC.
+PROCEDURE DIVISION.
+    MAIN-RTN SECTION.
+    OPEN OUTPUT OUT01_FILE.
+    *>3.データベース接続
+    EXEC SQL
+        CONNECT :USERNAME IDENTIFIED BY :PASSWORD
+            USING :DBNAME
+        END-EXEC.
+    *>4.データベースアクセス
+    *>DB カーソルオープン処理
+    PERFORM OPEN_RTN.
+    *>DB FETCH処理
+    PERFORM FETCH_RTN UNTIL SW-NOTFOUND = CST_1X.
+    *>DB カーソルクローズ処理
+    PERFORM CLOSE_RTN.
+    CLOSE OUT01_FILE.
+    STOP RUN.
+    MAIN-EXIT.
+    *>DB カーソルオープン処理
+    OPEN_RTN SECTION.
+        EXEC SQL
+            DECLARE CSR01 CURSOR FOR
+            SELECT tid,tname
+            FROM test
+        END-EXE.
+        EXEC SQL
+            OPEN CSR01
+        END-EXEC.
+    OPEN-EXIT.
+    *>DB FETCH処理
+    FETCH_RTN SECTION.
+        EXEC SQL
+            FETCH CSR01
+            INTO :TID,:TNAME
+        END-EXEC.
+    IF SQLCODE = CST_SQL_NF
+        THEN
+            MOVE CST_1X TO SW-NOTFOUND
+        ELSE
+            MOVE TID TO OUT01_TID
+            MOVE TNAME TO OUT01_TNAME
+            WRITE OUT01
+    END-IF.
+    FETCH-EXIT.
+    *>DB カーソルクローズ処理
+    CLOSE_RTN SECTION.
+        EXEC SQL
+            CLOSE CSR01
+        END-EXEC.
+    CLOSE-EXIT.
+    END PRGRAM APPLICATION_21_FETCH_2.
